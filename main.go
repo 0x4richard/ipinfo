@@ -3,10 +3,12 @@ package main
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"io"
 	"log"
 	"net/http"
+	"os"
+
+	"github.com/jedib0t/go-pretty/v6/table"
 )
 
 const IPINFO_URL = "https://ipinfo.io"
@@ -44,5 +46,24 @@ func main() {
 		log.Fatalf("Failed to parse response body: %v", err)
 	}
 
-	fmt.Println(ipInfo)
+	renderResult(ipInfo)
+}
+
+func renderResult(ipInfo IPInfo) {
+	t := table.NewWriter()
+	t.SetOutputMirror(os.Stdout)
+	t.AppendHeader(table.Row{"IP", "City", "Region", "Country", "Loc", "Org", "Postal", "Timezone"})
+	t.AppendRows([]table.Row{
+		{
+			ipInfo.IP,
+			ipInfo.City,
+			ipInfo.Region,
+			ipInfo.Country,
+			ipInfo.Loc,
+			ipInfo.Org,
+			ipInfo.Postal,
+			ipInfo.Timezone,
+		},
+	})
+	t.Render()
 }
