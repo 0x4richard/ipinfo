@@ -20,4 +20,4 @@ jobs:
       - name: Run goreleaser
         uses: goreleaser/goreleaser-action@v1
         env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_API_TOKEN}}
+          GITHUB_TOKEN: ${{secrets.GH_PAT}}
