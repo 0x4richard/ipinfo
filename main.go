@@ -20,7 +20,6 @@ type IPInfo struct {
 	Country  string `json:"country"`
 	Loc      string `json:"loc"`
 	Org      string `json:"org"`
-	Postal   string `json:"postal"`
 	Timezone string `json:"timezone"`
 }
 
@@ -52,7 +51,7 @@ func main() {
 func renderResult(ipInfo IPInfo) {
 	t := table.NewWriter()
 	t.SetOutputMirror(os.Stdout)
-	t.AppendHeader(table.Row{"IP", "City", "Region", "Country", "Loc", "Org", "Postal", "Timezone"})
+	t.AppendHeader(table.Row{"IP", "City", "Region", "Country", "Loc", "Org", "Timezone"})
 	t.AppendRows([]table.Row{
 		{
 			ipInfo.IP,
@@ -61,7 +60,6 @@ func renderResult(ipInfo IPInfo) {
 			ipInfo.Country,
 			ipInfo.Loc,
 			ipInfo.Org,
-			ipInfo.Postal,
 			ipInfo.Timezone,
 		},
 	})
